@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import render
+
+from .models import Drill
+from .forms import PostForm
 
 
 def index(request):
@@ -10,6 +14,10 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+def post_list(request):
+    return render(request, 'quiz/post_list.html', {})
+
+
+def post_new(request):
+    form = PostForm()
+    return render(request, 'quiz/post_edit.html', {'form': form})
