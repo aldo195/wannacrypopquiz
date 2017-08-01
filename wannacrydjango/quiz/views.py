@@ -15,7 +15,8 @@ def index(request):
 
 
 def post_list(request):
-    return render(request, 'quiz/post_list.html', {})
+    posts = Drill.objects.all()
+    return render(request, 'quiz/post_list.html', {'posts': posts})
 
 
 def post_new(request):
