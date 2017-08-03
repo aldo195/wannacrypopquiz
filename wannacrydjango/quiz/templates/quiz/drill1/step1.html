@@ -1,9 +1,12 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>New post</h1>
+    <h1>Welcome! Tell us a little about you.</h1>
+    <h3>We will never share or spam your email.</h3>
+    <p>Email:</p>
+    <p>Role at the organization:</p>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        {{ form.email }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}
