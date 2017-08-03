@@ -1,9 +1,16 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Step 5</h1>
+    <h1>Basic Workstation Inventory (Step 3/4)</h1>
+    <p>Vulnerability scans can go wrong for a million reasons. To find out if you have a successful scan report that
+        can guide your next steps towards a more secure network, we’ll start by checking how many computers the scanner
+        was able to “talk” with during the scan. This number is typically referred to as your active
+        or live hosts count. </p>
+    <p>In this sample Qualys report, for example, the scanner encountered a single (1) device.</p>
+    <p>If you’re having trouble interpreting your scan report, ask for help in the forums or contact support.</p>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.workstation_count_active }}
+        My scan’s active host count is: {{ form.workstation_count_active }}
+        <br><br>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

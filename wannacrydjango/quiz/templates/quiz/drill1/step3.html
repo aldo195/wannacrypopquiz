@@ -1,9 +1,18 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Step 3</h1>
+    <h1>Basic Workstation Inventory (Step 2/4)</h1>
+    <p>Most organizations perform vulnerability scans at least once a year that sweep the network for computers
+        and inspect them for obvious security holes. These vulnerability scans will serve as the
+        foundation of your inventory.</p>
+    <p>Grab a copy of a vulnerability scan report for the inside of your network from the last year.
+        If you don’t have a PDF version on your computer, you may need to access your scanner console or your
+        scanning vendor’s website. You can also ask your IT team or Managed Service Provider to send you a copy
+        of a recent network vulnerability assessment.</p>
+    <p>The front page of your scan report will look something like this:</p>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.has_report }}
+        <br><br>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

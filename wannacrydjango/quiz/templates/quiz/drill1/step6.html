@@ -1,9 +1,25 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Step 6</h1>
+    <h1>Basic Workstation Inventory (Step 4/4)</h1>
+    <p>You’ve almost finished reviewing your workstation inventory, this is last step and the trickiest!</p>
+    <p>Vulnerability scanning is largely dependent on the scanner being able to see “inside” the computers for
+        security holes like missing security patches and users with blank passwords. That means that the scanner
+        needs to log in at each computer using a valid username and password. This is known as “authentication”
+        and failed authentication means that the most critical vulnerabilities may not show up in the report. </p>
+    <p>The only thing worse than not protecting your systems is thinking that you’re protecting them when you’re
+        actually not. </p>
+    <p>Most scan solutions will include authentication results, either in the summary or as a separate report.
+        For example, the following Qualys scan had two (2) successful logins. </p>
+    <p>Pro Tip: Most scanners will count “null sessions” as successful authentication. This sort of Windows login
+        is very restricted and can give a false impression of good logins. You can identify this situation by
+        searching the report for the username that the scanner is using to log in to each host. If you don’t see
+        that username mentioned in the report, it’s probably failing to log in and you should reduce or zero out
+        your successful authentication count. Null session logins can look like this:</p>
+    <p>If you are unsure of your authentication results, ask for help in the forums or contact support.</p>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.workstation_count_auth }}
+        My scan’s successful authentication count is: {{ form.workstation_count_auth }}
+        <br><br>
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

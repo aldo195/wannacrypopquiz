@@ -1,9 +1,13 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Step 2</h1>
+    <h1>Basic Workstation Inventory (Step 1/4)</h1>
+    <p>You need to know about it to protect it, or in the timeless words of GI Joe- “Knowing is half the battle”.</p>
+    <p>In this first drill, you will get a sense for the state of your network inventory.
+        Start by guesstimating how many workstations you have. This would include PCs, laptops and macbooks.
+        It doesn’t include your Domain Controller, firewall, smartphones, tablets or printers. </p>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.workstation_count_estimate }}
+        We have about this many workstations in our network: {{ form.workstation_count_estimate }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

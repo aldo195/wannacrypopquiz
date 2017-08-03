@@ -2,5 +2,20 @@
 
 {% block content %}
     <h1>Results</h1>
-    <p>You did it {{ drill.email}} !</p>
+    <p>
+        Congratulations! By getting to know what you need to protect, you’re already ahead of most other IT managers.
+
+This drill identified the risk rating of your basic workstation inventory as:
+
+HIGH
+Explanation: You don’t have good visibility into the workstations you’re trying to protect. It’s almost certain that your computers are suffering from serious security holes that hackers can target to breach your network and compromise your data.
+Next Steps: Deploy a vulnerability scanning solution or work with an MSP that can do it for you. Deployment and configuration should take 1-2 hours and the scan itself a few hours depending on the size of the network. When you get the report, retry this drill.
+MEDIUM
+Explanation: You have some visibility into the workstations you’re trying to protect. That puts you ahead of the curve and on the right track. However you are for sure unaware of several major security holes that hackers can target in order to breach your network and compromise your data. A chain is only as strong as its weakest link.
+Next Steps: Find out which workstations were missing from the results and which failed scanner authentication. Then use these findings to adjust your scanning for more comprehensive coverage. You should also run the Critical Workstation Vulnerabilities drill.
+LOW
+Explanation: Way to go, it looks like you’ve achieved a good basic inventory of your workstations. Just make sure that this isn’t because you’ve signficantly under-guesstimated the number of workstations you have.
+Next Steps: Now that you have a sense of what you need to protect, check how you’ve been doing with proactive vulnerability management. Proceed to the Critical Workstation Vulnerabilities drill.
+
+    </p>
 {% endblock %}

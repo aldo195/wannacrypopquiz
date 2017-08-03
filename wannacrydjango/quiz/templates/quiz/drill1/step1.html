@@ -3,10 +3,11 @@
 {% block content %}
     <h1>Welcome! Tell us a little about you.</h1>
     <h3>We will never share or spam your email.</h3>
-    <p>Email:</p>
-    <p>Role at the organization:</p>
+
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.email }}
+        <p>Email: {{ form.email }}</p>
+        <p>Role: {{ form.role }}</p>
         <button type="submit" class="save btn btn-default">Save</button>
+        <p> {{ form.errors }} </p>
     </form>
 {% endblock %}
