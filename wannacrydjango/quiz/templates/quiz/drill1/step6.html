@@ -10,15 +10,19 @@
     </div>
 
     <div class="well">
-        <form method="POST" class="post-form">{% csrf_token %}
-            <div class="row">
-                <div class="col-sm-4">My scan’s successful authentication count is:</div>
+        <form method="POST" class="form-horizontal">{% csrf_token %}
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label>My scan’s successful authentication count is:</label>
+                </div>
             </div>
-            <div class="row">
+            <div class="form-group">
                 <div class="col-sm-4">{{ form.workstation_count_auth }}</div>
             </div>
-            <div class="row">
-                <div class="col-sm-4"><button type="submit" class="btn btn-success">Next</button></div>
+            <div class="form-group" >
+                <div class="col-sm-4" align="right">
+                    <button type="submit" class="btn btn-success">Next</button>
+                </div>
             </div>
         </form>
         <div class="panel-group" id="accordion">
@@ -50,7 +54,7 @@
                 <div class="panel-body">
 <p>Most scan solutions will include authentication results, either in the summary or as a separate report.
         For example, the following Qualys scan had two (2) successful logins. </p>
-    TODO: ADD IMAGE HERE
+    <img class="img-responsive" src="/static/images/auth-report.jpg" alt="Authentication Report">
     <p>If you are unsure of your authentication results, ask for help in the forums or contact support.</p>
                 </div>
               </div>
@@ -70,7 +74,7 @@
         that username mentioned in the report, it’s probably failing to log in and you should reduce or zero out
                         your successful authentication count.</p>
                     <p>Null session logins can look like this:</p>
-                    TODO: ADD IMAGE HERE
+                    <img class="img-responsive" src="/static/images/null-session.jpg" alt="report">
                 </div>
               </div>
             </div>

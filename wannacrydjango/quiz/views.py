@@ -85,7 +85,7 @@ def drill1_step4(request):
     current_drill.risk = 'high'
     current_drill.reason = 'no report'
     current_drill.save()
-    return render(request, 'quiz/drill1/results.html', {'drill': current_drill})
+    return render(request, 'quiz/drill1/step4.html', {'drill': current_drill})
 
 
 # STEP 5: Get active workstation count

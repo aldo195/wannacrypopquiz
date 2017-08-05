@@ -1,15 +1,46 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Basic Workstation Inventory</h1>
+  <h2>Basic Workstation Inventory</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="100"
+      aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        100% Complete
+      </div>
+    </div>
+    <div class="alert alert-danger">
+        <strong>Failure!</strong> You need a vulnerability report to conduct this drill.
+    </div>
 
-    <p>If you want to take an active role in the security of your network, you must have visibility into your
-        network inventory. No way around it. Luckily, there are lots of popular scanning solutions offering a
-        different balance between price and support, including Nessus, Qualys, OpenVAS and Rapid7. If you’re agnostic
-        and pressed for time, get the Rapid7 Nexpose which has a free 30 day trial. </p>
-    <p>If you have a Managed Services Provider and they haven’t done a vulnerability scan for you in the last year-
-        strongly consider switching to a more security-conscious provider. We’re happy to recommend some of our
-        highly ranked partners for you to consider. </p>
-    <p>End Drill</p>
+    <div class="well">
+       <p>The data that you gathered has determined your basic workstation inventory risk level.</p>
+    <p>
+        <div class="jumbotron"><div align="center"><h1>
 
+            <div class="text-danger">High Risk</div>
+
+        </h1></div></div>
+    </p>
+ <p>
+
+        <h3>Why?</h3>
+        <p>
+           You don’t have good visibility into the workstations you’re trying to protect.
+           It’s almost certain that your computers are suffering from serious security holes that hackers can
+           use to breach your network and compromise your data.
+        </p>
+        <h3>What's next?</h3>
+        <p>If you want to take an active role in the security of your network, you must have visibility into your
+            network inventory. No way around it. Luckily, there are lots of popular scanning solutions offering a
+            different balance between price and support, including
+            <a href="https://www.tenable.com/products/nessus-vulnerability-scanner">Nessus<a>,
+                <a href="https://www.qualys.com/free-trial/">Qualys</a>,
+                <a href="http://www.openvas.org/setup-and-start.html">OpenVAS</a> and
+                <a href="https://www.rapid7.com/products/nexpose/">Rapid7</a>.
+                If you’re agnostic and pressed for time, get the Rapid7 Nexpose which has a
+                <a href="https://www.rapid7.com/products/nexpose/download/">free 30 day trial</a>.</p>
+        <p>If you have a Managed Services Provider and they haven’t done a vulnerability scan for you in the last year-
+            strongly consider switching to a more security-conscious provider. We’re happy to recommend some of our
+            highly ranked partners for you to consider. </p>
+    </div>
 {% endblock %}

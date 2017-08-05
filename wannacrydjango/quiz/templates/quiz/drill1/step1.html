@@ -11,11 +11,26 @@
     <h4>Welcome! Tell us a little about you.
         <br><small>We will never share or spam your email.</small></h4>
     <div class="well">
-        <form method="POST" class="post-form">{% csrf_token %}
-            <p>Email: {{ form.email }}</p>
-            <p>Role: {{ form.role }}</p>
-            <button type="submit" class="btn btn-success">Next</button>
-            <p> {{ form.errors }} </p>
+        <form method="POST" class="form-horizontal">{% csrf_token %}
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <label>Email</label>
+                </div>
+                <div class="col-sm-1">
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1">Role</label>
+                <div class="col-sm-1">
+                    {{ form.role }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-1" align="right">
+                    <button type="submit" class="btn btn-success">Next</button>
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}

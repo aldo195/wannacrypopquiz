@@ -10,15 +10,19 @@
     </div>
 
     <div class="well">
-        <form method="POST" class="post-form">{% csrf_token %}
-            <div class="row">
-                <div class="col-sm-4">We have approximately this many workstations in our network:</div>
+        <form method="POST" class="form-horizontal">{% csrf_token %}
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label>We have approximately this many workstations in our network:</label>
+                </div>
             </div>
-            <div class="row">
+            <div class="form-group">
                 <div class="col-sm-4">{{ form.workstation_count_estimate }}</div>
             </div>
-            <div class="row">
-                <div class="col-sm-4"><button type="submit" class="btn btn-success">Next</button></div>
+            <div class="form-group" >
+                <div class="col-sm-4" align="right">
+                    <button type="submit" class="btn btn-success">Next</button>
+                </div>
             </div>
         </form>
         <div class="panel-group" id="accordion">
