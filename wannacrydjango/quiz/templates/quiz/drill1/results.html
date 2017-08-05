@@ -1,21 +1,114 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Results</h1>
+   <h2>Basic Workstation Inventory</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="100"
+      aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        100% Complete
+      </div>
+    </div>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Actually knowing your inventory puts you halfway to being a great CISO.
+    </div>
+
+    <div class="well">
+       <p>The data that you gathered has determined your basic workstation inventory risk level.</p>
     <p>
-        Congratulations! By getting to know what you need to protect, you’re already ahead of most other IT managers.
-
-This drill identified the risk rating of your basic workstation inventory as:
-
-HIGH
-Explanation: You don’t have good visibility into the workstations you’re trying to protect. It’s almost certain that your computers are suffering from serious security holes that hackers can target to breach your network and compromise your data.
-Next Steps: Deploy a vulnerability scanning solution or work with an MSP that can do it for you. Deployment and configuration should take 1-2 hours and the scan itself a few hours depending on the size of the network. When you get the report, retry this drill.
-MEDIUM
-Explanation: You have some visibility into the workstations you’re trying to protect. That puts you ahead of the curve and on the right track. However you are for sure unaware of several major security holes that hackers can target in order to breach your network and compromise your data. A chain is only as strong as its weakest link.
-Next Steps: Find out which workstations were missing from the results and which failed scanner authentication. Then use these findings to adjust your scanning for more comprehensive coverage. You should also run the Critical Workstation Vulnerabilities drill.
-LOW
-Explanation: Way to go, it looks like you’ve achieved a good basic inventory of your workstations. Just make sure that this isn’t because you’ve signficantly under-guesstimated the number of workstations you have.
-Next Steps: Now that you have a sense of what you need to protect, check how you’ve been doing with proactive vulnerability management. Proceed to the Critical Workstation Vulnerabilities drill.
-
+        <div class="jumbotron"><div align="center"><h1>
+        {% if drill.risk == "high" %}
+            <div class="text-danger">High Risk</div>
+        {% endif %}
+        {% if drill.risk == "medium" %}
+            <div class="text-warning">Medium Risk</div>
+        {% endif %}
+        {% if drill.risk == "low" %}
+            <div class="text-success">Low Risk</div>
+        {% endif %}
+        </h1></div></div>
     </p>
+
+    {% comment %}
+        <!-- TODO: move these descriptions to the database -->
+    {% endcomment %}
+    <p>
+    {% if drill.reason == "bad active" %}
+        <h3>Why?</h3>
+        <p>
+           You don’t have good visibility into the workstations you’re trying to protect.
+           It’s almost certain that your computers are suffering from serious security holes that hackers can
+           use to breach your network and compromise your data.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Reconfigure your vulnerability scanning solution or work with an MSP that can do it for you.
+           Configuration should take less than an hour and the scan itself a few hours depending on the size of the
+           network. When you have a more complete report, retry this drill.
+        </p>
+    {% endif %}
+    {% if drill.reason == "decent active and bad auth" %}
+        <h3>Why?</h3>
+        <p>
+           You're missing a bunch of workstations in your scans, and your scanner is having trouble
+           logging in and checking your computers from the inside.
+           That’s like a doctor that needs to diagnose an illness over the phone.
+           You can bet that your computers are suffering from serious security holes that hackers can
+           use to breach your network and compromise your data.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Configure your scanner so that it's scanning when all or most of your workstations are
+           Online and accessible to it. Ensure that the scanner has valid administrator credentials for logging into the
+           workstations.
+           When you have a more complete report, retry this drill.
+        </p>
+    {% endif %}
+    {% if drill.reason == "decent active and auth" %}
+        <h3>Why?</h3>
+        <p>
+            You have partial results which means you should dig into the report and identify what is causing a number of workstations to be missed, a number of login attempts to be rejected. Remember that workstations that are powered off or disconnected when the scan takes place will not be inspected. Also, if the scanner fails to log in at a workstation then that workstation is probably suffering from multiple security holes that no one (except the hackers) will know about.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Contact your security team or Managed Services Provider to review the report details and find which hosts or subnets are missing from the scan and why. Configure your scanner so that it's scanning when all or most of your workstations are online and accessible to it. Ensure that the scanner has valid administrator credentials for logging into the workstations.
+            When you have a more complete report, retry this drill. In the meanwhile, get a sense of how much danger is in the vulnerabilities that this scan was able to identify by running the drill for “Do I Have Really Bad Security Holes In My Network”.
+        </p>
+    {% endif %}
+    {% if drill.reason == "good active and bad auth" %}
+        <h3>Why?</h3>
+        <p>
+            You're doing a good job finding the workstations in your scans but your scanner is having trouble logging in and checking your computers from the inside.
+            That’s like a doctor that needs to diagnose an illness over the phone.
+            You can bet that your computers are suffering from serious security holes that hackers can
+            use to breach your network and compromise your data.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Ensure that the scanner has valid administrator credentials for logging into the workstations.
+            When you have a more complete report, retry this drill.
+        </p>
+    {% endif %}
+    {% if drill.reason == "good active and decent auth" %}
+        <h3>Why?</h3>
+        <p>
+            You're doing a good job finding the workstations in your scans but some of your workstations are rejecting the scanner’s login attempts. If the scanner fails to log in at a workstation then that workstation is probably suffering from multiple security holes that no one (except the hackers) will know about.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Ensure that the scanner has valid administrator credentials for logging into the workstations.
+           When you have a more complete report, retry this drill. In the meanwhile, get a sense of how much danger is in the vulnerabilities that this scan was able to identify by running the drill for “Do I Have Really Bad Security Holes In My Network”.
+        </p>
+    {% endif %}
+    {% if drill.reason == "good active and good auth" %}
+        <h3>Why?</h3>
+        <p>
+            Way to go, it looks like your team is doing a good job scanning the network for active workstations and authenticating to them in order to identify security holes. Now that you have a sense for what is on the network you can start making sure that major security holes are actually being closed by your team.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Run the next drill to find the answer to the question “Do I Have Really Bad Security Holes In My Network”.
+        </p>
+    {% endif %}
+    </p>
+    </div>
 {% endblock %}

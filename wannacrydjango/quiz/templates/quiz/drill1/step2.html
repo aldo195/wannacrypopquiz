@@ -1,13 +1,56 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Basic Workstation Inventory (Step 1/4)</h1>
-    <p>You need to know about it to protect it, or in the timeless words of GI Joe- “Knowing is half the battle”.</p>
-    <p>In this first drill, you will get a sense for the state of your network inventory.
-        Start by guesstimating how many workstations you have. This would include PCs, laptops and macbooks.
-        It doesn’t include your Domain Controller, firewall, smartphones, tablets or printers. </p>
-    <form method="POST" class="post-form">{% csrf_token %}
-        We have about this many workstations in our network: {{ form.workstation_count_estimate }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+   <h2>Basic Workstation Inventory</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="40"
+      aria-valuemin="0" aria-valuemax="100" style="width:40%">
+        40% Complete
+      </div>
+    </div>
+
+    <div class="well">
+        <form method="POST" class="post-form">{% csrf_token %}
+            <div class="row">
+                <div class="col-sm-4">We have approximately this many workstations in our network:</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">{{ form.workstation_count_estimate }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><button type="submit" class="btn btn-success">Next</button></div>
+            </div>
+        </form>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+             <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">What does this mean?</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">Taking inventory, or making a list of what you have, is the first step in protecting your network.
+                    <p>Like with anything else, you need to know it <i>exists</i> if you want to <i>protect</i> it. Or in the timeless words of
+                        GI Joe-</p><p><center>“Knowing is half the battle”.</center></p>
+                    <p>In this first drill, you will get a sense for the state of your network inventory.
+                        Start by guesstimating how many workstations are in your network.</p></div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">What counts as a workstation?</a>
+                </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Your workstation inventory guesstimate should include PCs, macs, laptops, and macbooks.</p>
+                    <p>One of the challenges in managing your vulnerabilities is patching holes in company workstations that are
+                        outside of the office- include these in your inventory count as well.</p>
+                    <p><b>Don't</b> include your servers, firewalls, smartphones, tablets, printers, smart fridges, or the mess you have in AWS.</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

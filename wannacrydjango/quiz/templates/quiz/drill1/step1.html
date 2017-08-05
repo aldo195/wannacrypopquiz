@@ -1,13 +1,21 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-    <h1>Welcome! Tell us a little about you.</h1>
-    <h3>We will never share or spam your email.</h3>
-
-    <form method="POST" class="post-form">{% csrf_token %}
-        <p>Email: {{ form.email }}</p>
-        <p>Role: {{ form.role }}</p>
-        <button type="submit" class="save btn btn-default">Save</button>
-        <p> {{ form.errors }} </p>
-    </form>
+   <h2>Basic Workstation Inventory</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="20"
+      aria-valuemin="0" aria-valuemax="100" style="width:20%">
+        20% Complete
+      </div>
+    </div>
+    <h4>Welcome! Tell us a little about you.
+        <br><small>We will never share or spam your email.</small></h4>
+    <div class="well">
+        <form method="POST" class="post-form">{% csrf_token %}
+            <p>Email: {{ form.email }}</p>
+            <p>Role: {{ form.role }}</p>
+            <button type="submit" class="btn btn-success">Next</button>
+            <p> {{ form.errors }} </p>
+        </form>
+    </div>
 {% endblock %}

@@ -1,3 +1,5 @@
+import logging
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
@@ -32,11 +34,7 @@ def get_current_drill(request):
 def drill1_step1(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
-        print('before validation')
-
         if form.is_valid():
-            print('passed validation')
-
             post = form.save()
             # Save the current drill's uuid in the session object
             request.session['drill_id'] = str(post.drill_id)
@@ -82,7 +80,12 @@ def drill1_step3(request):
 
 # STEP 4: User doesn't have a report to review, they fail the drill
 def drill1_step4(request):
-    return render(request, 'quiz/drill1/step4.html',)
+    current_drill = get_current_drill(request)
+
+    current_drill.risk = 'high'
+    current_drill.reason = 'no report'
+    current_drill.save()
+    return render(request, 'quiz/drill1/results.html', {'drill': current_drill})
 
 
 # STEP 5: Get active workstation count
@@ -115,4 +118,46 @@ def drill1_step6(request):
 
 # RESULTS
 def drill1_results(request):
-    return render(request, 'quiz/drill1/results.html', {'drill': get_current_drill(request)})
+    current_drill = get_current_drill(request)
+
+    # Calculate drill risk results as HIGH (bad), MEDIUM, or LOW (good)
+    # Of the estimated total workstations, how many were active?
+    # noinspection PyBroadException
+    try:
+        if current_drill.workstation_count_estimate is "0" or current_drill.workstation_count_active is "0":
+            # We don't want to divide by zero
+            current_drill.risk = 'high'
+            current_drill.reason = 'bad active'
+        else:
+            current_drill.active_percent = \
+                float(current_drill.workstation_count_active) / float(current_drill.workstation_count_estimate)
+            # Of the total active workstations, how many were successfully authenticated during the scan?
+            current_drill.auth_percent = \
+                float(current_drill.workstation_count_auth) / float(current_drill.workstation_count_active)
+            if float(current_drill.active_percent) > 0.9:
+                if float(current_drill.auth_percent) > 0.8:
+                    current_drill.risk = 'low'
+                    current_drill.reason = 'good active and good auth'
+                elif float(current_drill.auth_percent) > 0.6:
+                    current_drill.risk = 'medium'
+                    current_drill.reason = 'good active and decent auth'
+                else:
+                    current_drill.risk = 'high'
+                    current_drill.reason = 'good active and bad auth'
+            elif float(current_drill.active_percent) > 0.7:
+                if float(current_drill.auth_percent) > 0.8:
+                    current_drill.risk = 'medium'
+                    current_drill.reason = 'decent active and auth'
+                else:
+                    current_drill.risk = 'high'
+                    current_drill.reason = 'decent active and bad auth'
+            else:
+                current_drill.risk = 'high'
+                current_drill.reason = 'bad active'
+    except:
+        logging.error('Something went wrong in calculating risk and reason.')
+        current_drill.risk = 'high'
+        current_drill.reason = 'bad active'
+
+    current_drill.save()
+    return render(request, 'quiz/drill1/results.html', {'drill': current_drill})
