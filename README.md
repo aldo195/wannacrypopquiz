@@ -1,2 +1,1 @@
-# wannacrypopquiz
-Pop quiz your MSSP on WannaCry
+This is the first version of the Valhalla.io that is being publicly released.
