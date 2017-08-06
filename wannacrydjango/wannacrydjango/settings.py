@@ -25,7 +25,7 @@ SECRET_KEY = '_^p5#o$7bqn3wv5o-j$^0i*gyb-sj8ho7mi#n4*3$ffv4x7z8w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['valhalla-app-dev.us-west-1.elasticbeanstalk.com', 'localhost']
+ALLOWED_HOSTS = ['valhalla-app-dev.us-west-1.elasticbeanstalk.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -118,4 +118,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/quiz/static/'
+STATIC_URL = '/static/'
