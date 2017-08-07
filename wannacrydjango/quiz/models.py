@@ -18,7 +18,7 @@ class Drill(models.Model):
     email = models.EmailField(blank=True)
     role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True)
     workstation_count_estimate = models.CharField(max_length=10, blank=True)
-    has_report = models.CharField(max_length=10, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
+    has_report = models.CharField(max_length=100, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
     workstation_count_active = models.CharField(max_length=10, blank=True)
     workstation_count_auth = models.CharField(max_length=10, blank=True)
     active_percent = models.CharField(max_length=10, blank=True)
