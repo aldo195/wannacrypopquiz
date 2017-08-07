@@ -14,17 +14,17 @@ HAVE_REPORT = [
 
 
 class Drill(models.Model):
-    drill_id = models.CharField(max_length=100, primary_key=True, blank=True, unique=True, default=uuid.uuid4)
+    drill_id = models.CharField(max_length=500, primary_key=True, blank=True, unique=True, default=uuid.uuid4)
     email = models.EmailField(blank=True)
-    role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True)
-    workstation_count_estimate = models.CharField(max_length=10, blank=True)
-    has_report = models.CharField(max_length=100, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
-    workstation_count_active = models.CharField(max_length=10, blank=True)
-    workstation_count_auth = models.CharField(max_length=10, blank=True)
-    active_percent = models.CharField(max_length=10, blank=True)
-    auth_percent = models.CharField(max_length=10, blank=True)
-    risk = models.CharField(max_length=100, default=1, blank=True)
-    reason = models.CharField(max_length=300, default=1, blank=True)
+    role = models.CharField(max_length=500, choices=ROLE_CHOICES, blank=True)
+    workstation_count_estimate = models.CharField(max_length=500, blank=True)
+    has_report = models.CharField(max_length=500, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
+    workstation_count_active = models.CharField(max_length=500, blank=True)
+    workstation_count_auth = models.CharField(max_length=500, blank=True)
+    active_percent = models.CharField(max_length=500, blank=True)
+    auth_percent = models.CharField(max_length=500, blank=True)
+    risk = models.CharField(max_length=500, default=1, blank=True)
+    reason = models.CharField(max_length=500, default=1, blank=True)
 
     def publish(self):
         self.save()
