@@ -8,24 +8,13 @@
         20% Complete
       </div>
     </div>
-    <h4>Welcome! Tell us a little about you.
-        <br><small>We will never share or spam your email.</small></h4>
     <div class="well">
         <form method="POST" class="form-horizontal">{% csrf_token %}
-            <div class="form-group">
-                <div class="col-sm-1">
-                    <label>Email</label>
-                </div>
-                <div class="col-sm-1">
-                    {{ form.email }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-1">Role</label>
-                <div class="col-sm-1">
-                    {{ form.role }}
-                </div>
-            </div>
+            <p>This drill will guide you on checking the information security risk level of your current workstation
+            inventory. If this area is identified as a significant source of risk for your organization, you'll
+            receive suggestions for how you can reduce that risk.</p>
+        <p><strong>Expected Time:</strong>&nbsp;Less than 30 minutes</p>
+        <p><strong>Difficulty:</strong>&nbsp;Basic</p>
             <div class="form-group">
                 <div class="col-sm-1" align="right">
                     <button type="submit" class="btn btn-success">Next</button>
