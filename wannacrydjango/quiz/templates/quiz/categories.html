@@ -1,0 +1,46 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+   <div class="jumbotron">
+       <h1>Let's get started!</h1>
+       <p class="lead">Select a category below, answer a few questions in what we call a "drill", and learn the next steps
+           you need for a more secure network. </p>
+   </div>
+   <div class="container">
+       <div class="row">
+           <div class="col-md-4">
+               <div class="panel-group">
+                   <div class="panel panel-default">
+                       <div class="panel-heading">
+                           <h2 class="panel-title">
+                           <a data-toggle="collapse" href="#collapse1">Vulnerabilities</a>
+                           </h2>
+                       </div>
+                       <div id="collapse1" class="panel-collapse collapse">
+                           <div class="panel-body">
+                               <a href="/drill/1/1">Basic Workstation Inventory</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-4">
+               <h2>Ransomware</h2>
+           </div>
+           <div class="col-md-4">
+               <h2>Firewalls</h2>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col-md-4">
+               <h2>Antivirus</h2>
+           </div>
+           <div class="col-md-4">
+               <h2>SIEM</h2>
+           </div>
+           <div class="col-md-4">
+               <h2>Phishing</h2>
+           </div>
+       </div>
+   </div>
+{% endblock %}

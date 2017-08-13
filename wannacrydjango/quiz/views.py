@@ -10,19 +10,12 @@ from .models import Drill
 from .forms import DrillForm
 
 
-def index(request):
-    template = loader.get_template('quiz/index.html')
-    context = {
-        'latest_question_list': "1",
-    }
-    return HttpResponse(template.render(context, request))
+def drill_categories(request):
+    categories = Drill.objects.all()  # this is just a placeholder for when we have cats in db
+    return render(request, 'quiz/categories.html', {'categories': categories})
 
 
-def post_list(request):
-    posts = Drill.objects.all()
-    return render(request, 'quiz/post_list.html', {'posts': posts})
-
-
+# Helper method
 def get_current_drill(request):
     # For the current session's drill, save the workstation count estimate
     current = request.session['drill_id']
