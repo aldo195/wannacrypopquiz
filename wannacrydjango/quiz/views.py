@@ -23,7 +23,125 @@ def get_current_drill(request):
     return current_drill
 
 
-# STEP 1: Get email
+# Drill: Notorious Vulnerabilities
+def drill_notorious_vulnerabilities_step1(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            # Save the current drill's uuid in the session object
+            request.session['drill_id'] = str(post.drill_id)
+            post.save()
+            return redirect('drill_notorious_vulnerabilities_step2')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step1.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_step2(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            current_drill = get_current_drill(request)
+            current_drill.wannacry_count = form.cleaned_data['wannacry_count']
+            current_drill.save()
+            return redirect('drill_notorious_vulnerabilities_step3')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step2.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_step3(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            current_drill = get_current_drill(request)
+            current_drill.doublepulsar_count = form.cleaned_data['doublepulsar_count']
+            current_drill.save()
+            return redirect('drill_notorious_vulnerabilities_step4')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step3.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_step4(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            current_drill = get_current_drill(request)
+            current_drill.heartbleed_count = form.cleaned_data['heartbleed_count']
+            current_drill.save()
+            return redirect('drill_notorious_vulnerabilities_step5')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step4.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_step5(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            current_drill = get_current_drill(request)
+            current_drill.shellshock_count = form.cleaned_data['shellshock_count']
+            current_drill.save()
+            return redirect('drill_notorious_vulnerabilities_step6')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step5.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_step6(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            current_drill = get_current_drill(request)
+            current_drill.mirai_count = form.cleaned_data['mirai_count']
+            current_drill.save()
+            return redirect('drill_notorious_vulnerabilities_results')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/notorious-vulnerabilities/step6.html', {'form': form})
+
+
+def drill_notorious_vulnerabilities_results(request):
+    current_drill = get_current_drill(request)
+
+    # Calculate drill risk results as HIGH (bad), MEDIUM, or LOW (good)
+    # noinspection PyBroadException
+    try:
+        count = 0
+
+        if current_drill.wannacry_count is not "0":
+            count += 1
+        if current_drill.doublepulsar_count is not "0":
+            count += 1
+        if current_drill.heartbleed_count is not "0":
+            count += 1
+        if current_drill.shellshock_count is not "0":
+            count += 1
+        if current_drill.mirai_count is not "0":
+            count += 1
+
+        if count > 1:
+            current_drill.risk = 'high'
+            current_drill.reason = 'multiple cases'
+        elif count == 1:
+            current_drill.risk = 'medium'
+            current_drill.risk = 'single case'
+        else:
+            current_drill.risk = 'low'
+            current_drill.risk = 'no cases'
+
+    except:
+        logging.error('Something went wrong in calculating risk and reason.')
+        current_drill.risk = 'high'
+        current_drill.reason = 'error'
+
+    current_drill.save()
+    return render(request, 'quiz/notorious-vulnerabilities/results.html', {'drill': current_drill})
+
+
+# Drill: Workstation Inventory
 def drill1_step1(request):
     if request.method == "POST":
         form = DrillForm(request.POST)

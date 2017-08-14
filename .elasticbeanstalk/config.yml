@@ -1,4 +1,6 @@
 branch-defaults:
+  create-categories-view:
+    environment: valhalla-app-dev
   default:
     environment: valhalla-app-dev
   parent-menu:
@@ -17,6 +19,6 @@ global:
   instance_profile: null
   platform_name: null
   platform_version: null
-  profile: null
-  sc: null
+  profile: eb-cli
+  sc: git
   workspace_type: Application
