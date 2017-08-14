@@ -127,16 +127,17 @@ def drill_notorious_vulnerabilities_results(request):
             current_drill.reason = 'multiple cases'
         elif count == 1:
             current_drill.risk = 'medium'
-            current_drill.risk = 'single case'
+            current_drill.reason = 'single case'
         else:
             current_drill.risk = 'low'
-            current_drill.risk = 'no cases'
+            current_drill.reason = 'no cases'
 
     except:
         logging.error('Something went wrong in calculating risk and reason.')
         current_drill.risk = 'high'
         current_drill.reason = 'error'
 
+    print('debug', current_drill.risk, current_drill.reason)
     current_drill.save()
     return render(request, 'quiz/notorious-vulnerabilities/results.html', {'drill': current_drill})
 
