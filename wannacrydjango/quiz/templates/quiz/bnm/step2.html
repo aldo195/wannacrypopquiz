@@ -1,0 +1,67 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+   <h2>Notorious Vulnerabilities</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="35"
+      aria-valuemin="0" aria-valuemax="100" style="width:35%">
+        35% Complete
+      </div>
+    </div>
+
+    <div class="well">
+        <form method="POST" class="form-horizontal">{% csrf_token %}
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label>Imagine that there is a WannaCry ransomware infection spreading through your network.
+                        Is any network monitoring in place that should alert you?</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">{{ form.has_network_monitoring }}</div>
+            </div>
+            <div class="form-group" >
+                <div class="col-sm-4" align="right">
+                    <button type="submit" class="btn btn-success">Next</button>
+                </div>
+            </div>
+        </form>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+             <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">What does this mean?</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Network monitoring means that an automated system and/or a human analyst is looking for signs
+                        of bad activity (known as Indicators of Compromise) in the data that’s moving between your
+                        computers. Typically this starts with looking at which websites/domains are being accessed by
+                        your computers, and which IP addresses outside your network are receiving connections from your
+                        computers.
+                    </p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Why is this important?</a>
+                </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>
+                        Malware typically has an “incubation” period in which it is present but not yet causing much
+                        harm. This is especially true of more sophisticated “operator-driven” malware that requires
+                        the hacker to chose commands such as stealing passwords or infecting the Domain Controller.
+                        Sometimes days go by between the initial infection and when the actual damage is done. Network
+                        monitoring gives you a chance to stop a breach when it’s still small in breadth and in impact.
+                    </p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
