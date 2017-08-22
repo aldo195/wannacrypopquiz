@@ -1,15 +1,16 @@
 import uuid
 from django.db import models
 
-ROLE_CHOICES = [
-    ('1', 'IT Manager'),
-    ('2', 'Executive'),
-    ('3', 'Other'),
-]
 
 HAVE_REPORT = [
     ('1', "I have a report, let's continue."),
     ('2', "I don't have a report like this."),
+]
+
+# TODO: this should be more generic
+HAVE_NETWORK_MONITORING = [
+    ('1', "Yes"),
+    ('2', "No"),
 ]
 
 
@@ -34,6 +35,11 @@ class Drill(models.Model):
     heartbleed_count = models.CharField(max_length=500, blank=True)
     shellshock_count = models.CharField(max_length=500, blank=True)
     mirai_count = models.CharField(max_length=500, blank=True)
+
+    # Vulnerability Management - Notorious Vulnerabilities
+    has_network_monitoring = models.CharField(max_length=500, choices=HAVE_NETWORK_MONITORING, blank=True,
+                                              default=HAVE_NETWORK_MONITORING[0][0])
+    wannacry_notification_time = models.CharField(max_length=500, blank=True)
 
     def publish(self):
         self.save()

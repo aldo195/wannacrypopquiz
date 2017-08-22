@@ -1,7 +1,7 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-   <h2>Notorious Vulnerabilities</h2>
+   <h2>Basic Network Monitoring</h2>
    <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="50"
       aria-valuemin="0" aria-valuemax="100" style="width:50%">
@@ -10,22 +10,82 @@
     </div>
 
     <div class="well">
-        <form method="POST" class="form-horizontal">{% csrf_token %}
-            <div class="form-group">
+
+
                 <div class="col-sm-8">
-                    <label>I've identified this many hosts vulnerable to DoublePulsar (the WannaCry 2.0 vulnerability) in
-                        our network:</label>
+                    <label>Open the following empty site in a web browser within the monitored network:</label>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4">{{ form.doublepulsar_count }}</div>
-            </div>
+                        <div class="col-sm-8">
+                            <a href="http://iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com" target="_blank">
+                                http://iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com
+                            </a>
+                        </div>
+                <div class="col-sm-8">
+                    <br><p>Your browser will load a blank page in a new tab.</p>
+                    <p><b>Start</b> the timer below once the new tab opens.</p>
+                    <p><b>Stop</b> the timer once you and your team are notified of the suspicious network activity.</p>
+                </div>
+
+            <div class="col-sm-8" style="text-align: center">
+
+    <h3><time>00:00:00</time></h3>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <!--<button id="clear">clear</button>-->
+
+        <script>
+            var timer_v = document.getElementsByTagName('h3')[0],
+            start = document.getElementById('start'),
+            stop = document.getElementById('stop'),
+            clear = document.getElementById('clear'),
+            seconds = 0, minutes = 0, hours = 0,
+            t;
+            function add() {
+                seconds++;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                    if (minutes >= 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                }
+            timer_v.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+            timer();
+        }
+        function timer() {
+            t = setTimeout(add, 1000);
+            /* document.getElementById('iocIframe').src = "http://iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com" */
+        }
+        /* Start button */
+        start.onclick = function() {
+            timer();
+        }
+        /* Stop button */
+        stop.onclick = function() {
+            /* document.getElementById('iocIframe').src = "" */
+            document.getElementById('timeField').value = seconds;
+            clearTimeout(t);
+        }
+        /* Clear button */
+        clear.onclick = function() {
+            /* document.getElementById('iocIframe').src = "" */
+            timer_v.textContent = "00:00:00";
+            seconds = 0; minutes = 0; hours = 0;
+        }
+    </script>
+
+        </div>
+
+        <form method="POST" class="form-horizontal">{% csrf_token %}
             <div class="form-group" >
-                <div class="col-sm-4" align="right">
+                <input type="hidden" id="timeField" name="wannacry_notification_time">
+                <div class="col-sm-8" align="right">
                     <button type="submit" class="btn btn-success">Next</button>
                 </div>
             </div>
         </form>
+    </div>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
              <div class="panel-heading">
@@ -35,10 +95,9 @@
               </div>
               <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <p>While the WannaCry ransomware made headlines by bringing down key networks used by the UK health
-                        system, FedEx, and others, it only used two of the NSA cyberweapons released by The Shadow
-                        Brokers. The EternalRocks malware that came afterwards targets seven(!) vulnerabilities and
-                        creates the DoublePulsar backdoor vulnerability in the computers it infects.
+                    <p>Let’s wave a big red flag inside your network and check how long it takes your network
+                        monitoring to spot it and notify you. We can do this by <b>simulating</b> a call to the empty site that
+                        WannaCry ransomware checks when it runs on an infected system.
                     </p>
                 </div>
               </div>
@@ -46,20 +105,32 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How many of my hosts are affected?</a>
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">What is that site?</a>
                 </h4>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <p>Check for the following words in your VA report using whatever filter/search capability you have.
-                        In most document viewers, CTRL+F will suffice.</p>
-                    <ul>
-                        <li>DoublePulsar</li>
-                        <li>99439 (In Tenable Nessus Reports)</li>
-                        <li>QUID 70077 (In Qualys Reports)</li>
-                    </ul>
-                    <p>For each match, you should be able to see the IP address or hostname. Each unique IP or hostname
-                        counts as one affected host.</p>
+                    <p>The WannaCry ransomware made headlines in May 2017 when it used an NSA cyberweapon
+                        (the EternalBlue exploit) to quickly spread and hold hostage thousands of computer systems
+                        around the world. Even worse damage was prevented by a security researcher discovering that the
+                        malware checks for the existence of an empty site before it decides to encrypt an infected
+                        computer. Simply by adding a blank page to this site, the researcher stopped the original
+                        version of WannaCry in its tracks.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How does this test work?</a>
+                </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>We can use the fact that WannaCry always checks for that particular website in order to simulate
+                        the presence of WannaCry in the network without actually running any malware or putting any
+                        systems at risk. Anything in your network reaching out to that site should be a five-alarm fire
+                        for any network security monitoring solution.</p>
                 </div>
               </div>
             </div>

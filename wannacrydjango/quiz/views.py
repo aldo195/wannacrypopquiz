@@ -23,6 +23,81 @@ def get_current_drill(request):
     return current_drill
 
 
+# Drill: Basic Network Monitoring (BNM)
+def drill_bnm_step1(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            # Save the current drill's uuid in the session object
+            request.session['drill_id'] = str(post.drill_id)
+            post.save()
+            return redirect('drill_bnm_step2')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/bnm/step1.html', {'form': form})
+
+
+def drill_bnm_step2(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            has_network_monitoring = form.cleaned_data['has_network_monitoring']
+            current_drill = get_current_drill(request)
+            current_drill.has_network_monitoring = has_network_monitoring
+            current_drill.save()
+
+            if has_network_monitoring == '1':
+                return redirect('drill_bnm_step3')
+            else:
+                return redirect('drill_bnm_results')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/bnm/step2.html', {'form': form})
+
+
+def drill_bnm_step3(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        print('Debug:', request.POST)
+        if form.is_valid():
+            has_network_monitoring = form.cleaned_data['has_network_monitoring']
+            current_drill = get_current_drill(request)
+            current_drill.has_network_monitoring = has_network_monitoring
+            current_drill.save()
+
+            return redirect('drill_bnm_results')
+    else:
+        form = DrillForm()
+    return render(request, 'quiz/bnm/step3.html', {'form': form})
+
+
+def drill_bnm_results(request):
+    current_drill = get_current_drill(request)
+
+    # Calculate drill risk results as HIGH (bad), MEDIUM, or LOW (good)
+    # noinspection PyBroadException
+    try:
+        if current_drill.has_network_monitoring == '2':
+            current_drill.risk = 'high'
+            current_drill.reason = 'no network monitoring'
+        elif current_drill.wannacry_notification_time == 'foo':
+            current_drill.risk = 'medium'
+            current_drill.reason = 'foo'
+        else:
+            current_drill.risk = 'low'
+            current_drill.reason = 'bar'
+
+    except:
+        logging.error('Something went wrong in calculating risk and reason.')
+        current_drill.risk = 'high'
+        current_drill.reason = 'error'
+
+    print('debug', current_drill.risk, current_drill.reason)
+    current_drill.save()
+    return render(request, 'quiz/bnm/results.html', {'drill': current_drill})
+
+
 # Drill: Notorious Vulnerabilities
 def drill_notorious_vulnerabilities_step1(request):
     if request.method == "POST":
@@ -134,8 +209,8 @@ def drill_notorious_vulnerabilities_results(request):
 
     except:
         logging.error('Something went wrong in calculating risk and reason.')
-        current_drill.risk = 'high'
         current_drill.reason = 'error'
+        current_drill.risk = 'high'
 
     print('debug', current_drill.risk, current_drill.reason)
     current_drill.save()

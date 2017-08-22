@@ -1,7 +1,7 @@
 {% extends 'quiz/base.html' %}
 
 {% block content %}
-   <h2>Notorious Vulnerabilities</h2>
+   <h2>Basic Network Monitoring</h2>
    <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="100"
       aria-valuemin="0" aria-valuemax="100" style="width:100%">
@@ -9,11 +9,11 @@
       </div>
     </div>
     <div class="alert alert-success">
-        <strong>Success!</strong> You've gone hunting for big, bad vulnerabilities and made it back alive.
+        <strong>Success!</strong> You ran your first network monitoring drill.
     </div>
 
     <div class="well">
-       <p>The data that you gathered has determined your notorious vulnerabilities risk level.</p>
+       <p>The data that you gathered has determined your basic network monitoring risk level.</p>
     <p>
         <div class="jumbotron"><div align="center"><h1>
         {% if drill.risk == "high" %}
@@ -73,6 +73,9 @@
     </p>
         <div class="alert alert-info">
             Last step! Don't forget to <b><a href="https://www.surveymonkey.com/r/YJ8VXB6">take the two minute survey</a></b>.
+        </div>
+        <div>
+            <a href="/">Return to main page</a>
         </div>
     </div>
 {% endblock %}
