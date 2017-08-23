@@ -59,11 +59,10 @@ def drill_bnm_step2(request):
 def drill_bnm_step3(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
-        print('Debug:', request.POST)
         if form.is_valid():
-            has_network_monitoring = form.cleaned_data['has_network_monitoring']
+            wannacry_notification_time = form.cleaned_data['wannacry_notification_time']
             current_drill = get_current_drill(request)
-            current_drill.has_network_monitoring = has_network_monitoring
+            current_drill.wannacry_notification_time = wannacry_notification_time
             current_drill.save()
 
             return redirect('drill_bnm_results')
@@ -78,22 +77,25 @@ def drill_bnm_results(request):
     # Calculate drill risk results as HIGH (bad), MEDIUM, or LOW (good)
     # noinspection PyBroadException
     try:
-        if current_drill.has_network_monitoring == '2':
+        if current_drill.has_network_monitoring == '2' or current_drill.wannacry_notification_time == '':
             current_drill.risk = 'high'
             current_drill.reason = 'no network monitoring'
-        elif current_drill.wannacry_notification_time == 'foo':
+        elif int(current_drill.wannacry_notification_time) > 10800:
+            current_drill.risk = 'high'
+            current_drill.reason = 'too long to notify'
+        elif 3600 <= int(current_drill.wannacry_notification_time) <= 10800:
             current_drill.risk = 'medium'
-            current_drill.reason = 'foo'
+            current_drill.reason = 'moderate time to notify'
         else:
             current_drill.risk = 'low'
-            current_drill.reason = 'bar'
+            current_drill.reason = 'short time to notify'
 
-    except:
+    except Exception as e:
         logging.error('Something went wrong in calculating risk and reason.')
+        logging.error(e)
         current_drill.risk = 'high'
         current_drill.reason = 'error'
 
-    print('debug', current_drill.risk, current_drill.reason)
     current_drill.save()
     return render(request, 'quiz/bnm/results.html', {'drill': current_drill})
 

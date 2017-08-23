@@ -32,41 +32,59 @@
         <!-- TODO: move these descriptions to the database -->
     {% endcomment %}
     <p>
-    {% if drill.reason == "multiple cases" %}
+    {% if drill.reason == "no network monitoring" %}
         <h3>Why?</h3>
         <p>
-           You have more than a few cases of these headliner vulnerabilities in your network. This is a strong signal
-            that no one has been watching for security holes until now.
+           By not having network monitoring in place at all, you are relying on a “prevention only” approach to
+            Information Security. This approach is very risky because a significant amount of malware and hacking
+            tools will bypass your antivirus, no matter how “next generation” it is.
         </p>
         <h3>What's next?</h3>
         <p>
-           Drop everything and get these vulnerabilities fixed before it's too late.
-            Afterwards, apply strategic thought as to how you need to change vulnerability management at your organization.
+           You need to have a shot at spotting breaches in your security between the time the malware gets passed your
+            antivirus and the time the FBI notifies you that many of your customers are having their identities stolen
+            and you’re to blame. Luckily, there some easy ways to get started with basic network monitoring. Start by
+            setting up a dedicated email distribution list that will receive email notifications of threat detections.
+            Then ask your firewall vendor for help sending high priority detections to that email distribution list, or
+            consider signing up for OpenDNS and set their detections to go to your notification distribution list.
         </p>
     {% endif %}
-    {% if drill.reason == "single case" %}
+    {% if drill.reason == "too long to notify" %}
         <h3>Why?</h3>
         <p>
-           You have some very famous, very noticeable, vulnerabilities in your network.
-            Probably no one has been watching for security holes until now, or they haven’t been taking it seriously.
+            Over three hours have passed since your network experienced what <b>looks</b> like WannaCry ransomware.
+            You’re in a dangerous situation because you think that someone is watching your network while clearly they’re not.
         </p>
         <h3>What's next?</h3>
         <p>
-           Get these vulnerabilities resolved, confirm that they're gone with another scan, and afterwards apply
-            strategic thought on improving (or creating) the
-            vulnerability management program at your organization.
+           Perform a step by step review of how your network monitoring solution should have caught this activity and
+            alerted you to the threat. Find where the failure was, fix it, and repeat the exercise.
         </p>
     {% endif %}
-    {% if drill.reason == "no cases" %}
+    {% if drill.reason == "moderate time to notify" %}
         <h3>Why?</h3>
         <p>
-            That’s a relief! You haven’t spotted these celebrity vulnerabilities in your network, and that’s a good sign.
+           It took a while but eventually you were notified on what looked like ransomware in your network. That’s good
+            but there may be some tweaks you can make that will enable you to shut down threats faster and minimize the
+            damage they do to your organization.
         </p>
         <h3>What's next?</h3>
         <p>
-            Take a minute to celebrate a bit and then continue on to the next drill. It’s possible that you have these
-            or other high risk vulnerabilities in your network but your scans aren’t picking up on them. Improving your
-            scan coverage should be your next step.
+           Review the expected detection/notification times for each step of your network monitoring procedure. What
+            process changes can be made to catch things faster? If you’re using a managed services provider, this is
+            also a good opportunity to examine the SLAs they’ve agreed to and whether they’re holding up their end.
+        </p>
+    {% endif %}
+    {% if drill.reason == "short time to notify" %}
+        <h3>Why?</h3>
+        <p>
+            Your network monitoring spotted the red flag and quickly let you know about it. That’s awesome!
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Awareness is not the final step in taking down a ransomware outbreak. You need to be positioned to also act
+            quickly. We’ll be adding Incident Response drills soon, in the meanwhile check how well you’re proactively
+            preventing outbreaks in the <a href="/drill/1/1/">Basic Workstation Inventory</a> drill.
         </p>
     {% endif %}
 

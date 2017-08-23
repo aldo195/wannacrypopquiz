@@ -3,9 +3,9 @@
 {% block content %}
    <h2>Basic Network Monitoring</h2>
    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="50"
-      aria-valuemin="0" aria-valuemax="100" style="width:50%">
-        50% Complete
+      <div class="progress-bar" role="progressbar" aria-valuenow="80"
+      aria-valuemin="0" aria-valuemax="100" style="width:80%">
+        80% Complete
       </div>
     </div>
 
@@ -22,8 +22,8 @@
                         </div>
                 <div class="col-sm-8">
                     <br><p>Your browser will load a blank page in a new tab.</p>
-                    <p><b>Start</b> the timer below once the new tab opens.</p>
-                    <p><b>Stop</b> the timer once you and your team are notified of the suspicious network activity.</p>
+                    <p><b>Start</b> the stopwatch below once the new tab opens.</p>
+                    <p><b>Stop</b> the stopwatch once you and your team are notified of the suspicious network activity.</p>
                 </div>
 
             <div class="col-sm-8" style="text-align: center">
@@ -38,10 +38,11 @@
             start = document.getElementById('start'),
             stop = document.getElementById('stop'),
             clear = document.getElementById('clear'),
-            seconds = 0, minutes = 0, hours = 0,
+            seconds = 0, minutes = 0, hours = 0, total = 0,
             t;
             function add() {
                 seconds++;
+                total++;
                 if (seconds >= 60) {
                     seconds = 0;
                     minutes++;
@@ -64,14 +65,14 @@
         /* Stop button */
         stop.onclick = function() {
             /* document.getElementById('iocIframe').src = "" */
-            document.getElementById('timeField').value = seconds;
+            document.getElementById('timeField').value = total;     /* store the total time in hidden form field */
             clearTimeout(t);
         }
         /* Clear button */
         clear.onclick = function() {
             /* document.getElementById('iocIframe').src = "" */
             timer_v.textContent = "00:00:00";
-            seconds = 0; minutes = 0; hours = 0;
+            seconds = 0; minutes = 0; hours = 0; total = 0;
         }
     </script>
 
