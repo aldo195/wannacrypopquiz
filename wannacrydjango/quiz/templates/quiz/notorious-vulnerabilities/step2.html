@@ -13,8 +13,7 @@
         <form method="POST" class="form-horizontal">{% csrf_token %}
             <div class="form-group">
                 <div class="col-sm-8">
-                    <label>I've identified this many hosts vulnerable to EternalBlue (the WannaCry vulnerability) in
-                        our network:</label>
+                    <label>You found this many hosts vulnerable to EternalBlue (the WannaCry vulnerability) in the report:</label>
                 </div>
             </div>
             <div class="form-group">
@@ -46,19 +45,20 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How many of my computers (hosts) are affected?</a>
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How do I check?</a>
                 </h4>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <p>Check for the following words in your VA report using whatever filter/search capability you have.
+                    <p>Search for the following numbers or words in your scan report using whatever filter/search capability you have.
                         In most document viewers, CTRL+F will suffice.</p>
                     <ul>
-                        <li>CVE-2017-0144</li>
-                        <li>MS17-010</li>
+                        <li>91360 (in Qualys reports)</li>
+                        <li>97737 (in Nessus reports)</li>
                         <li>EternalBlue</li>
                         <li>WannaCry</li>
-                        <li>QID 91360 (in Qualys reports)</li>
+                        <li>CVE-2017-0144</li>
+                        <li>MS17-010</li>
                     </ul>
                     <p>For each match, you should be able to see the IP address or hostname. Each unique IP or hostname counts as one affected host.</p>
                 </div>

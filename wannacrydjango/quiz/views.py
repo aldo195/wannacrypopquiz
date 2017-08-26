@@ -14,7 +14,7 @@ def intro(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
-            return redirect('drill1_step1')
+            return redirect('drill_notorious_vulnerabilities_step1')
     else:
         return render(request, 'quiz/intro.html', )
 

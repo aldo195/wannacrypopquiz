@@ -9,11 +9,10 @@
       </div>
     </div>
     <div class="alert alert-success">
-        <strong>Success!</strong> You've gone hunting for big, bad vulnerabilities and made it back alive.
+        <strong>Success!</strong> You've completed this drill.
     </div>
-
     <div class="well">
-       <p>The data that you gathered has determined your notorious vulnerabilities risk level.</p>
+       <p>The data that you gathered has determined your risk level from notorious vulnerabilities.</p>
     <p>
         <div class="jumbotron"><div align="center"><h1>
         {% if drill.risk == "high" %}
@@ -73,7 +72,7 @@
     </p>
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us16.list-manage.com","uuid":"33bd3be74b7b37142e57a2063","lid":"cbb381e23a"}) })</script>
         <div>
-            <a href="/">Return to main page</a>
+            <a href="/drill/1/1">Continue to next drill</a>
         </div>
     </div>
 {% endblock %}
