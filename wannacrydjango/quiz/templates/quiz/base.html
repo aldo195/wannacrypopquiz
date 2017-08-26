@@ -20,13 +20,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Valhalla.io</a>
+                <a class="navbar-brand" href="/">Valhalla.io</a>
                 </div>
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Vulnerability Management</a></li>
-                <li><a href="#">Endpoint Protection</a></li>
-                <li><a href="#">Network Security</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li class="active"><a href="#">Security Layers</a></li>
+                <li><a href="#">Reporting</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -40,5 +40,15 @@
                     {% block content %}
                     {% endblock %}
     </div>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-104330962-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     </body>
 </html>

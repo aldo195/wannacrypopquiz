@@ -10,4 +10,4 @@ class DrillForm(forms.ModelForm):
         fields = '__all__'
 
     def __str__(self):
-        return str(self.email)
+        return str(self.drill_id)

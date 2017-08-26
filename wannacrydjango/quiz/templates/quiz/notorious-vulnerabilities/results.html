@@ -1,0 +1,81 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+   <h2>Notorious Vulnerabilities</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="100"
+      aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        100% Complete
+      </div>
+    </div>
+    <div class="alert alert-success">
+        <strong>Success!</strong> You've gone hunting for big, bad vulnerabilities and made it back alive.
+    </div>
+
+    <div class="well">
+       <p>The data that you gathered has determined your notorious vulnerabilities risk level.</p>
+    <p>
+        <div class="jumbotron"><div align="center"><h1>
+        {% if drill.risk == "high" %}
+            <div class="text-danger">High Risk</div>
+        {% endif %}
+        {% if drill.risk == "medium" %}
+            <div class="text-warning">Medium Risk</div>
+        {% endif %}
+        {% if drill.risk == "low" %}
+            <div class="text-success">Low Risk</div>
+        {% endif %}
+        </h1></div></div>
+    </p>
+
+    {% comment %}
+        <!-- TODO: move these descriptions to the database -->
+    {% endcomment %}
+    <p>
+    {% if drill.reason == "multiple cases" %}
+        <h3>Why?</h3>
+        <p>
+           You have more than a few cases of these headliner vulnerabilities in your network. This is a strong signal
+            that no one has been watching for security holes until now.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Drop everything and get these vulnerabilities fixed before it's too late.
+            Afterwards, apply strategic thought as to how you need to change vulnerability management at your organization.
+        </p>
+    {% endif %}
+    {% if drill.reason == "single case" %}
+        <h3>Why?</h3>
+        <p>
+           You have some very famous, very noticeable, vulnerabilities in your network.
+            Probably no one has been watching for security holes until now, or they haven’t been taking it seriously.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Get these vulnerabilities resolved, confirm that they're gone with another scan, and afterwards apply
+            strategic thought on improving (or creating) the
+            vulnerability management program at your organization.
+        </p>
+    {% endif %}
+    {% if drill.reason == "no cases" %}
+        <h3>Why?</h3>
+        <p>
+            That’s a relief! You haven’t spotted these celebrity vulnerabilities in your network, and that’s a good sign.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Take a minute to celebrate a bit and then continue on to the next drill. It’s possible that you have these
+            or other high risk vulnerabilities in your network but your scans aren’t picking up on them. Improving your
+            scan coverage should be your next step.
+        </p>
+    {% endif %}
+
+    </p>
+        <div class="alert alert-info">
+            Last step! Don't forget to <b><a href="https://www.surveymonkey.com/r/YJ8VXB6">take the two minute survey</a></b>.
+        </div>
+        <div>
+            <a href="/">Return to main page</a>
+        </div>
+    </div>
+{% endblock %}

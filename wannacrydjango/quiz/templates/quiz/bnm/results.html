@@ -1,0 +1,99 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+   <h2>Basic Network Monitoring</h2>
+   <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="100"
+      aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        100% Complete
+      </div>
+    </div>
+    <div class="alert alert-success">
+        <strong>Success!</strong> You ran your first network monitoring drill.
+    </div>
+
+    <div class="well">
+       <p>The data that you gathered has determined your basic network monitoring risk level.</p>
+    <p>
+        <div class="jumbotron"><div align="center"><h1>
+        {% if drill.risk == "high" %}
+            <div class="text-danger">High Risk</div>
+        {% endif %}
+        {% if drill.risk == "medium" %}
+            <div class="text-warning">Medium Risk</div>
+        {% endif %}
+        {% if drill.risk == "low" %}
+            <div class="text-success">Low Risk</div>
+        {% endif %}
+        </h1></div></div>
+    </p>
+
+    {% comment %}
+        <!-- TODO: move these descriptions to the database -->
+    {% endcomment %}
+    <p>
+    {% if drill.reason == "no network monitoring" %}
+        <h3>Why?</h3>
+        <p>
+           By not having network monitoring in place at all, you are relying on a “prevention only” approach to
+            Information Security. This approach is very risky because a significant amount of malware and hacking
+            tools will bypass your antivirus, no matter how “next generation” it is.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           You need to have a shot at spotting breaches in your security between the time the malware gets passed your
+            antivirus and the time the FBI notifies you that many of your customers are having their identities stolen
+            and you’re to blame. Luckily, there some easy ways to get started with basic network monitoring. Start by
+            setting up a dedicated email distribution list that will receive email notifications of threat detections.
+            Then ask your firewall vendor for help sending high priority detections to that email distribution list, or
+            consider signing up for OpenDNS and set their detections to go to your notification distribution list.
+        </p>
+    {% endif %}
+    {% if drill.reason == "too long to notify" %}
+        <h3>Why?</h3>
+        <p>
+            Over three hours have passed since your network experienced what <b>looks</b> like WannaCry ransomware.
+            You’re in a dangerous situation because you think that someone is watching your network while clearly they’re not.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Perform a step by step review of how your network monitoring solution should have caught this activity and
+            alerted you to the threat. Find where the failure was, fix it, and repeat the exercise.
+        </p>
+    {% endif %}
+    {% if drill.reason == "moderate time to notify" %}
+        <h3>Why?</h3>
+        <p>
+           It took a while but eventually you were notified on what looked like ransomware in your network. That’s good
+            but there may be some tweaks you can make that will enable you to shut down threats faster and minimize the
+            damage they do to your organization.
+        </p>
+        <h3>What's next?</h3>
+        <p>
+           Review the expected detection/notification times for each step of your network monitoring procedure. What
+            process changes can be made to catch things faster? If you’re using a managed services provider, this is
+            also a good opportunity to examine the SLAs they’ve agreed to and whether they’re holding up their end.
+        </p>
+    {% endif %}
+    {% if drill.reason == "short time to notify" %}
+        <h3>Why?</h3>
+        <p>
+            Your network monitoring spotted the red flag and quickly let you know about it. That’s awesome!
+        </p>
+        <h3>What's next?</h3>
+        <p>
+            Awareness is not the final step in taking down a ransomware outbreak. You need to be positioned to quickly and effectively
+            stop the infection from spreading. We’ll be adding Incident Response drills soon, in the meanwhile check how well you’re proactively
+            preventing outbreaks in the <a href="/drill/1/1/">Basic Workstation Inventory</a> drill.
+        </p>
+    {% endif %}
+
+    </p>
+        <div class="alert alert-info">
+            Last step! Don't forget to <b><a href="https://www.surveymonkey.com/r/YJ8VXB6">take the two minute survey</a></b>.
+        </div>
+        <div>
+            <a href="/">Return to main page</a>
+        </div>
+    </div>
+{% endblock %}
