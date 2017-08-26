@@ -12,8 +12,6 @@ urlpatterns = [
 
     url(r'^drill/1/3/$', views.drill1_step3, name='drill1_step3'),
 
-    url(r'^drill/1/4/$', views.drill1_step4, name='drill1_step4'),
-
     url(r'^drill/1/5/$', views.drill1_step5, name='drill1_step5'),
 
     url(r'^drill/1/6/$', views.drill1_step6, name='drill1_step6'),

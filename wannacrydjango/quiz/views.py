@@ -270,20 +270,14 @@ def drill1_step3(request):
             if has_report == '1':
                 return redirect('drill1_step5')
             else:
-                return redirect('drill1_step4')
+                # this used to be step 4, now go directly to results
+                current_drill.risk = 'high'
+                current_drill.reason = 'no report'
+                current_drill.save()
+                return redirect('drill1_results')
     else:
         form = DrillForm()
     return render(request, 'quiz/drill1/step3.html', {'form': form})
-
-
-# STEP 4: User doesn't have a report to review, they fail the drill
-def drill1_step4(request):
-    current_drill = get_current_drill(request)
-
-    current_drill.risk = 'high'
-    current_drill.reason = 'no report'
-    current_drill.save()
-    return render(request, 'quiz/drill1/step4.html', {'drill': current_drill})
 
 
 # STEP 5: Get active workstation count
@@ -322,7 +316,10 @@ def drill1_results(request):
     # Of the estimated total workstations, how many were active?
     # noinspection PyBroadException
     try:
-        if current_drill.workstation_count_estimate is "0" or current_drill.workstation_count_active is "0":
+        if current_drill.risk == 'high':
+            # we already set risk earlier, probably they didn't have a report
+            pass
+        elif current_drill.workstation_count_estimate is "0" or current_drill.workstation_count_active is "0":
             # We don't want to divide by zero
             current_drill.risk = 'high'
             current_drill.reason = 'bad active'
