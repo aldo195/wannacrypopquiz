@@ -5,6 +5,8 @@ branch-defaults:
     environment: valhalla-app-dev
   parent-menu:
     environment: valhalla-app-dev
+  single-flow:
+    environment: valhalla-app-dev
 environment-defaults:
   valhalla-app-dev:
     branch: null
