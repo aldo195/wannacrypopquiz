@@ -10,6 +10,15 @@ from .models import Drill
 from .forms import DrillForm
 
 
+def intro(request):
+    if request.method == "POST":
+        form = DrillForm(request.POST)
+        if form.is_valid():
+            return redirect('drill1_step1')
+    else:
+        return render(request, 'quiz/intro.html', )
+
+
 def drill_categories(request):
     categories = Drill.objects.all()  # this is just a placeholder for when we have cats in db
     return render(request, 'quiz/categories.html', {'categories': categories})
