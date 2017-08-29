@@ -7,6 +7,16 @@ HAVE_REPORT = [
     ('2', "I don't have a report like this."),
 ]
 
+HAVE_AUTH = [
+    ('1', "My report includes successful scanner authentication."),
+    ('2', "My report does NOT have successful scanner authentication."),
+]
+
+HAVE_ETERNALBLUE = [
+    ('1', "My report includes one or more cases of Eternal Blue."),
+    ('2', "My report does NOT have any Eternal Blue."),
+]
+
 # TODO: this should be more generic
 HAVE_NETWORK_MONITORING = [
     ('1', "Yes"),
@@ -24,6 +34,8 @@ class Drill(models.Model):
     # Vulnerability Management - Workstation Inventory
     workstation_count_estimate = models.CharField(max_length=500, blank=True)
     has_report = models.CharField(max_length=500, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
+    has_auth = models.CharField(max_length=500, choices=HAVE_AUTH, blank=True, default=HAVE_AUTH[0][0])
+    has_eternalblue = models.CharField(max_length=500, choices=HAVE_ETERNALBLUE, blank=True, default=HAVE_ETERNALBLUE[0][0])
     workstation_count_active = models.CharField(max_length=500, blank=True)
     workstation_count_auth = models.CharField(max_length=500, blank=True)
     active_percent = models.CharField(max_length=500, blank=True)

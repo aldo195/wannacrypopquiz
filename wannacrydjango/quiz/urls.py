@@ -2,8 +2,17 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    #url(r'^$', views.drill_categories, name='drill_categories'),
     url(r'^$', views.intro, name='intro'),
+
+    url(r'^drill/vulnerability-report/1/$', views.drill_vr_step1, name='drill_vr_step1'),
+
+    url(r'^drill/vulnerability-report/2/$', views.drill_vr_step2, name='drill_vr_step2'),
+
+    url(r'^drill/vulnerability-report/3/$', views.drill_vr_step3, name='drill_vr_step3'),
+
+    url(r'^drill/vulnerability-report/4/$', views.drill_vr_step4, name='drill_vr_step4'),
+
+    url(r'^drill/vulnerability-report/results/$', views.drill_vr_results, name='drill_vr_results'),
 
     # Drill #1: Basic Workstation Inventory
     url(r'^drill/1/1/$', views.drill1_step1, name='drill1_step1'),
