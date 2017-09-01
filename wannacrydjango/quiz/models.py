@@ -17,6 +17,11 @@ HAVE_ETERNALBLUE = [
     ('2', "My report does NOT have any Eternal Blue."),
 ]
 
+INDEPENDENT_SCAN = [
+    ('1', "We'll run the scans."),
+    ('2', "A third-party will run the scans."),
+]
+
 # TODO: this should be more generic
 HAVE_NETWORK_MONITORING = [
     ('1', "Yes"),
@@ -36,6 +41,7 @@ class Drill(models.Model):
     has_report = models.CharField(max_length=500, choices=HAVE_REPORT, blank=True, default=HAVE_REPORT[0][0])
     has_auth = models.CharField(max_length=500, choices=HAVE_AUTH, blank=True, default=HAVE_AUTH[0][0])
     has_eternalblue = models.CharField(max_length=500, choices=HAVE_ETERNALBLUE, blank=True, default=HAVE_ETERNALBLUE[0][0])
+    independent_scan = models.CharField(max_length=500, choices=INDEPENDENT_SCAN, blank=True, default=INDEPENDENT_SCAN[0][0])
     workstation_count_active = models.CharField(max_length=500, blank=True)
     workstation_count_auth = models.CharField(max_length=500, blank=True)
     active_percent = models.CharField(max_length=500, blank=True)

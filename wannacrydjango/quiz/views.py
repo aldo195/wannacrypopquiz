@@ -14,14 +14,9 @@ def intro(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
-            return redirect('drill_vr_step1')
+            return redirect('step/1001')
     else:
         return render(request, 'quiz/intro.html', )
-
-
-def drill_categories(request):
-    categories = Drill.objects.all()  # this is just a placeholder for when we have cats in db
-    return render(request, 'quiz/categories.html', {'categories': categories})
 
 
 # Helper method
@@ -32,8 +27,7 @@ def get_current_drill(request):
     return current_drill
 
 
-# Demo Drill: Vulnerability Report
-def drill_vr_step1(request):
+def step_1001(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
@@ -41,32 +35,36 @@ def drill_vr_step1(request):
             # Save the current drill's uuid in the session object
             request.session['drill_id'] = str(post.drill_id)
             post.save()
-            return redirect('drill_vr_step2')
+            # Does the user have a report?
+            current_drill = get_current_drill(request)
+            current_drill.has_report = form.cleaned_data['has_report']
+            if current_drill.has_report == '1':
+                return redirect('step_1003')
+            else:
+                return redirect('step_1002')
     else:
         form = DrillForm()
-    return render(request, 'quiz/vulnerability-report/step1.html', {'form': form})
+    return render(request, 'quiz/vulnerability-report/1001.html', {'form': form})
 
 
-def drill_vr_step2(request):
+def step_1002(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
             current_drill = get_current_drill(request)
-            current_drill.has_report = form.cleaned_data['has_report']
+            current_drill.independent_scan = form.cleaned_data['independent_scan']
             current_drill.save()
 
-            print(current_drill.has_report)
-
-            if current_drill.has_report == '1':
-                return redirect('drill_vr_step3')
+            if current_drill.independent_scan == '1':
+                return redirect('step_1008')
             else:
-                return redirect('drill_vr_results')
+                return redirect('step_1009')
     else:
         form = DrillForm()
-    return render(request, 'quiz/vulnerability-report/step2.html', {'form': form})
+    return render(request, 'quiz/vulnerability-report/1002.html', {'form': form})
 
 
-def drill_vr_step3(request):
+def step_1003(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
@@ -75,15 +73,15 @@ def drill_vr_step3(request):
             current_drill.save()
 
             if current_drill.has_auth == '1':
-                return redirect('drill_vr_step4')
+                return redirect('step_1004')
             else:
-                return redirect('drill_vr_results')
+                return redirect('step_1007')
     else:
         form = DrillForm()
-    return render(request, 'quiz/vulnerability-report/step3.html', {'form': form})
+    return render(request, 'quiz/vulnerability-report/1003.html', {'form': form})
 
 
-def drill_vr_step4(request):
+def step_1004(request):
     if request.method == "POST":
         form = DrillForm(request.POST)
         if form.is_valid():
@@ -91,41 +89,38 @@ def drill_vr_step4(request):
             current_drill.has_eternalblue = form.cleaned_data['has_eternalblue']
             current_drill.save()
 
-            return redirect('drill_vr_results')
+            if current_drill.has_eternalblue == '1':
+                return redirect('step_1005')
+            else:
+                return redirect('step_1006')
     else:
         form = DrillForm()
-    return render(request, 'quiz/vulnerability-report/step4.html', {'form': form})
+    return render(request, 'quiz/vulnerability-report/1004.html', {'form': form})
 
 
-def drill_vr_results(request):
+def step_1005(request):
     current_drill = get_current_drill(request)
-
-    # Calculate drill risk results as HIGH (bad), MEDIUM, or LOW (good)
-    # noinspection PyBroadException
+    return render(request, 'quiz/vulnerability-report/1005.html', {'drill': current_drill})
 
 
-    try:
-        if current_drill.has_report == '2':
-            current_drill.risk = 'high'
-            current_drill.reason = 'no report'
-        elif current_drill.has_auth == '2':
-            current_drill.risk = 'high'
-            current_drill.reason = 'no auth'
-        elif current_drill.has_eternalblue == '1':
-            current_drill.risk = 'high'
-            current_drill.reason = 'has eternal blue'
-        else:
-            current_drill.risk = 'low'
-            current_drill.reason = 'passed'
+def step_1006(request):
+    current_drill = get_current_drill(request)
+    return render(request, 'quiz/vulnerability-report/1006.html', {'drill': current_drill})
 
-    except Exception as e:
-        logging.error('Something went wrong in calculating risk and reason.')
-        logging.error(e)
-        current_drill.risk = 'high'
-        current_drill.reason = 'error'
 
-    current_drill.save()
-    return render(request, 'quiz/vulnerability-report/results.html', {'drill': current_drill})
+def step_1007(request):
+    current_drill = get_current_drill(request)
+    return render(request, 'quiz/vulnerability-report/1007.html', {'drill': current_drill})
+
+
+def step_1008(request):
+    current_drill = get_current_drill(request)
+    return render(request, 'quiz/vulnerability-report/1008.html', {'drill': current_drill})
+
+
+def step_1009(request):
+    current_drill = get_current_drill(request)
+    return render(request, 'quiz/vulnerability-report/1009.html', {'drill': current_drill})
 
 
 # Drill: Basic Network Monitoring (BNM)

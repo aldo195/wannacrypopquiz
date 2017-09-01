@@ -4,15 +4,23 @@ from . import views
 urlpatterns = [
     url(r'^$', views.intro, name='intro'),
 
-    url(r'^drill/vulnerability-report/1/$', views.drill_vr_step1, name='drill_vr_step1'),
+    url(r'^step/1001/$', views.step_1001, name='step_1001'),
 
-    url(r'^drill/vulnerability-report/2/$', views.drill_vr_step2, name='drill_vr_step2'),
+    url(r'^step/1002/$', views.step_1002, name='step_1002'),
 
-    url(r'^drill/vulnerability-report/3/$', views.drill_vr_step3, name='drill_vr_step3'),
+    url(r'^step/1003/$', views.step_1003, name='step_1003'),
 
-    url(r'^drill/vulnerability-report/4/$', views.drill_vr_step4, name='drill_vr_step4'),
+    url(r'^step/1004/$', views.step_1004, name='step_1004'),
 
-    url(r'^drill/vulnerability-report/results/$', views.drill_vr_results, name='drill_vr_results'),
+    url(r'^step/1005/$', views.step_1005, name='step_1005'),
+
+    url(r'^step/1006/$', views.step_1006, name='step_1006'),
+
+    url(r'^step/1007/$', views.step_1007, name='step_1007'),
+
+    url(r'^step/1008/$', views.step_1008, name='step_1008'),
+
+    url(r'^step/1009/$', views.step_1009, name='step_1009'),
 
 ]
 
