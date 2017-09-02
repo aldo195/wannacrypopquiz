@@ -3,23 +3,23 @@ from django.db import models
 
 
 HAVE_REPORT = [
-    ('1', "I have a report, let's continue."),
-    ('2', "I don't have a report like this."),
+    ('1', "I have a vulnerability scan report"),
+    ('2', "I don't have a report like this"),
 ]
 
 HAVE_AUTH = [
-    ('1', "Confirmed successful authentication."),
-    ('2', "No successful authentication."),
+    ('1', "Confirmed successful authentication"),
+    ('2', "No successful authentication"),
 ]
 
 HAVE_ETERNALBLUE = [
-    ('1', "Eternal Blue vulnerability detected."),
-    ('2', "No cases of Eternal Blue."),
+    ('1', "Found Eternal Blue vulnerability"),
+    ('2', "No cases of Eternal Blue found"),
 ]
 
 INDEPENDENT_SCAN = [
-    ('1', "We'll run the scans."),
-    ('2', "A third-party will run the scans."),
+    ('1', "We'll run the scans ourselves"),
+    ('2', "A third-party will run the scans"),
 ]
 
 # TODO: this should be more generic
