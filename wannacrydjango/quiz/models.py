@@ -8,13 +8,13 @@ HAVE_REPORT = [
 ]
 
 HAVE_AUTH = [
-    ('1', "My report includes successful scanner authentication."),
-    ('2', "My report does NOT have successful scanner authentication."),
+    ('1', "Confirmed successful authentication."),
+    ('2', "No successful authentication."),
 ]
 
 HAVE_ETERNALBLUE = [
-    ('1', "My report includes one or more cases of Eternal Blue."),
-    ('2', "My report does NOT have any Eternal Blue."),
+    ('1', "Eternal Blue vulnerability detected."),
+    ('2', "No cases of Eternal Blue."),
 ]
 
 INDEPENDENT_SCAN = [

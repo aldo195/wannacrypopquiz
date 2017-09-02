@@ -3,6 +3,8 @@ branch-defaults:
     environment: valhalla-app-dev
   default:
     environment: valhalla-app-dev
+  layout:
+    environment: valhalla-app-dev
   parent-menu:
     environment: valhalla-app-dev
   single-flow:
