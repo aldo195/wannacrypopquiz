@@ -13,8 +13,7 @@
         <form method="POST" class="form-horizontal">{% csrf_token %}
             <div class="form-group">
                 <div class="col-sm-8">
-                    <label>I've identified this many hosts vulnerable to Shellshock in
-                        our network:</label>
+                    <label>You found this many hosts vulnerable to Shellshock in the report:</label>
                 </div>
             </div>
             <div class="form-group">
@@ -46,7 +45,7 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How many of my hosts are affected?</a>
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">How do I check?</a>
                 </h4>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
@@ -54,6 +53,8 @@
                     <p>Check for the following words in your VA report using whatever filter/search capability you have.
                         In most document viewers, CTRL+F will suffice.</p>
                     <ul>
+                        <li>13038 (in Qualys reports)</li>
+                        <li>77823 (in Nessus reports)</li>
                         <li>Shellshock</li>
                         <li>CVE-2014-6271</li>
                     </ul>

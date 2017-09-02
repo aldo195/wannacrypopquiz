@@ -1,0 +1,54 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 order-1">
+            <div class="p-5">
+                <h2>You don't need more security solutions- use what you have like an expert.</h2>
+                <h3>Valhalla provides IT managers with cybersecurity guidance online, solving the need for more
+                    secure networks without more buying and deploying.
+                <form method="POST" class="form-horizontal">{% csrf_token %}
+                    <div class="form-group" align="center">
+                        <br>
+                        <button type="submit" class="btn btn-success">Get started.</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<!--
+<br>
+<section>
+    <div class="container">
+         <div class="row">
+            <div class="col-md-6">
+         <p>Analyze vulnerability reports from Nessus, Qualys, Rapid7 or any other format and quickly
+        spot what a top cybersecurity expert would look for:</p>
+                <ul>
+            <li>Ransomware vulnerabilities</li>
+            <li>Important systems that are NOT getting scanned</li>
+            <li>Vulnerability scans that are only checking your systems from the outside</li>
+            <li>The five favorite questions of security consultants</li>
+        </ul>
+            </div>
+         </div>
+        <div class="row">
+            <div class="col-md-6">
+               <p>Valhalla.io is like a TurboTax for your cybersecurity. Using this site you will be using your existing
+        vulnerability scans like an Information Security expert.</p>
+        <ul>
+            <li>Get 10x more value out of the security solution that you've already bought and used</li>
+            <li>Review the reports you receive from consultants like an elite white-hat hacker</li>
+            <li>Learn skills that separate the top IT security managers from the rest</li>
+        </ul>
+            </div>
+         </div>
+
+    </div>
+</section>
+-->
+{% endblock %}
